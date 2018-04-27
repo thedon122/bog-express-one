@@ -1,3 +1,4 @@
+
 const express = require('express')
 const router = express.Router()
 
@@ -58,3 +59,5 @@ router.delete('/:id', async (req, rea) => {
         res.status(500).json(err)
     }
 })
+
+module.exports = router

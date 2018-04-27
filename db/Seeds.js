@@ -12,7 +12,7 @@ const saved = async () => {
     const luke = new Creature({ name: 'Luke', description: 'Jedi' })
     await luke.save()
     const darth = new Creature({ name: 'Darth Vader', description: 'Father of Luke' })
-    await darth.save
+    await darth.save()
     db.close()
 }
 saved()

@@ -4,8 +4,8 @@ const mongoose = require ('mongoose')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const app = express()
-const router = require('routes/creatures')
 
+mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_URL)
 
 const db = mongoose.connection
@@ -19,10 +19,12 @@ db.on('open', () => {
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-
+app.use(express.static(`${__dirname}/client/build`))
 app.get('/', (req,res) => {
-    res.send("Hello World")
+    res.sendFile(__dirname + '/client/build/index.html')
 })
+const CreaturesController = require('./controllers/Creatures')
+app.use('/api/creatures', CreaturesController)
 
 const PORT = process.env.PORT || 3001 
 app.listen(PORT, () => {
